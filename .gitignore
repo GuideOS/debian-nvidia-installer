@@ -1,1 +1,17 @@
-deb_build/
+# Debian packaging build artifacts
+debian/debian-nvidia-installer/
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.debhelper.log
+debian/*.substvars
+
+# Build outputs
+*.deb
+*.changes
+*.buildinfo
+
+# Temporary files
+*~
+.#*
+\#*#

@@ -1,0 +1,17 @@
+Source: debian-nvidia-installer
+Section: utils
+Priority: optional
+Maintainer: Leonardo Amaral <leonardo_amaral98@hotmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.0
+Homepage: https://github.com/devleonardoamaral/debian-nvidia-installer
+Vcs-Git: https://github.com/devleonardoamaral/debian-nvidia-installer.git
+Vcs-Browser: https://github.com/devleonardoamaral/debian-nvidia-installer
+
+Package: debian-nvidia-installer
+Architecture: amd64
+Depends: ${misc:Depends}, dialog, findutils, gawk, mokutil, pciutils, wget
+Description: NVIDIA driver installer with a Bash TUI
+ This tool allows you to install NVIDIA drivers on Debian using an interactive
+ text-based interface (TUI). It automates steps such as package installation,
+ compatibility checks, and graphics environment configuration.
