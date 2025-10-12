@@ -38,6 +38,9 @@ for file in "$SCRIPT_DIR"/translate/*.sh; do source "$file"; done
 for file in "$SCRIPT_DIR"/*.sh; do source "$file"; done
 for file in "$SCRIPT_DIR"/tui/*.sh; do source "$file"; done
 
+# Define o idioma do script com base no sistema
+tr::detect_language
+
 # Função de ajuda
 script::help() {
     local script_name
@@ -67,6 +70,12 @@ tr::add "en_US" "script::help.cmd.version" "Displays the script version."
 tr::add "en_US" "script::help.cmd.help" "Shows this help message."
 tr::add "en_US" "script::help.examples" "Examples:"
 
+tr::add "de_DE" "script::help.using" "Verwendung: %1 [Befehl] [Optionen]"
+tr::add "de_DE" "script::help.commands" "Befehle:"
+tr::add "de_DE" "script::help.cmd.version" "Zeigt die Skript-Version an."
+tr::add "de_DE" "script::help.cmd.help" "Zeigt diese Hilfe an."
+tr::add "de_DE" "script::help.examples" "Beispiele:"
+
 # Limpeza / Encerramento
 script::exit() {
     local exit_message
@@ -88,6 +97,8 @@ script::exit() {
 
 tr::add "pt_BR" "script::exit.informlogpath" "O resumo da última execução do script está disponível em: %1"
 tr::add "en_US" "script::exit.informlogpath" "The summary of the last script execution is available at: %1"
+
+tr::add "de_DE" "script::exit.informlogpath" "Die Zusammenfassung der letzten Skript-Ausführung ist verfügbar unter: %1"
 
 script::requirements() {
     # Garante que o script só seja executado na versão correta
@@ -122,12 +133,16 @@ tr::add "en_US" "script::requirements.verifying" "Verifying script dependencies.
 tr::add "en_US" "script::requirements.success" "Dependencies verified successfully."
 tr::add "en_US" "script::requirements.failure" "Failed to verify dependencies."
 
-# Define o idioma do script com base no sistema
-tr::detect_language
+tr::add "de_DE" "script::requirements.invalid_distro" "Nicht unterstütztes Betriebssystem: %1"
+tr::add "de_DE" "script::requirements.verifying" "Skript-Abhängigkeiten werden überprüft..."
+tr::add "de_DE" "script::requirements.success" "Abhängigkeiten erfolgreich überprüft."
+tr::add "de_DE" "script::requirements.failure" "Fehler beim Überprüfen der Abhängigkeiten."
 
 # Processa os argumentos
 tr::add "pt_BR" "default.invalid.command" "Comando inválido: %1"
 tr::add "en_US" "default.invalid.command" "Invalid command: %1"
+
+tr::add "de_DE" "default.invalid.command" "Ungültiger Befehl: %1"
 
 if [[ $# -gt 0 ]]; then
     case "$1" in
@@ -165,6 +180,13 @@ Distribuição: %2\n
     tr::add "en_US" "default.script.welcome" "Welcome to the Debian NVIDIA Installer %1\n
   > This installer is released under the GPLv3 license.
   > Project repository: https://github.com/devleonardoamaral/debian-nvidia-installer
+
+Distribution: %2\n
+"
+
+    tr::add "de_DE" "default.script.welcome" "Willkommen beim Debian NVIDIA Installer %1\n
+  > Dieser Installer wird unter der GPLv3-Lizenz veröffentlicht.
+  > Projekt-Repository: https://github.com/devleonardoamaral/debian-nvidia-installer
 
 Distribution: %2\n
 "

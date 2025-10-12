@@ -218,3 +218,6 @@ tr::add "pt_BR" "desktop::switch_gpu_preferences.disable" "Definindo GPU integra
 
 tr::add "en_US" "desktop::switch_gpu_preferences.enable" "Setting discrete GPU for application %1"
 tr::add "en_US" "desktop::switch_gpu_preferences.disable" "Setting integrated GPU for application %1"
+
+tr::add "de_DE" "desktop::switch_gpu_preferences.enable" "Dedizierte GPU für Anwendung %1 wird eingestellt"
+tr::add "de_DE" "desktop::switch_gpu_preferences.disable" "Integrierte GPU für Anwendung %1 wird eingestellt"

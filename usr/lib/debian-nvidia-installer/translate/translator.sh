@@ -69,6 +69,28 @@ declare -Ag T_EN_US=(
     ["default.tui.button.exit"]="Exit"
 )
 
+# Translation list (associative arrays)
+declare -Ag T_DE_DE=(
+    ["default.script.rootaccess.required"]="Root-Berechtigung erforderlich."
+    ["default.script.pause"]="Drücken Sie Enter zum Fortfahren..."
+    ["default.script.canceled.byuser"]="Vorgang vom Benutzer abgebrochen."
+    ["default.script.canceled.byfailure"]="Vorgang fehlgeschlagen."
+    ["default.script.restartrequired"]="Starten Sie das System neu, damit die Änderungen wirksam werden."
+    ["default.script.restartsessionrequired"]="Starten Sie die grafische Sitzung neu, damit die Änderungen wirksam werden."
+
+    ["default.tui.title.warn"]="WARNUNG"
+    ["default.tui.title.error"]="FEHLER"
+
+    ["default.tui.button.ok"]="Ok"
+    ["default.tui.button.yes"]="Ja"
+    ["default.tui.button.no"]="Nein"
+    ["default.tui.button.confirm"]="Bestätigen"
+    ["default.tui.button.abort"]="Abbrechen"
+    ["default.tui.button.cancel"]="Abbrechen"
+    ["default.tui.button.remove"]="Entfernen"
+    ["default.tui.button.exit"]="Beenden"
+)
+
 # Adiciona uma entrada de tradução.
 tr::add() {
     local lang="$1"
@@ -81,6 +103,9 @@ tr::add() {
             ;;
         EN_US)
             T_EN_US["$key"]="$value"
+            ;;
+        DE_DE)
+            T_DE_DE["$key"]="$value"
             ;;
         *)
             echo "Key '$key' not added. Unsupported language: $lang." >&2
@@ -104,6 +129,7 @@ tr::setup_lang() {
     case "${lang^^}" in
         PT_BR) SCRIPT_LANG="pt_BR" ;;
         EN_US) SCRIPT_LANG="en_US" ;;
+        DE_DE|DE) SCRIPT_LANG="de_DE" ;;
         *)
             echo "Unsupported language: $1. Using default: en_US." >&2
             SCRIPT_LANG="en_US"
@@ -133,6 +159,7 @@ tr::t() {
     case "$SCRIPT_LANG" in
         pt_BR) echo "${T_PT_BR[$key]:-$key}" ;;
         en_US) echo "${T_EN_US[$key]:-$key}" ;;
+        de_DE) echo "${T_DE_DE[$key]:-$key}" ;;
         *) echo "${T_EN_US[$key]:-$key}" ;;
     esac
 }

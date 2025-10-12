@@ -78,6 +78,17 @@ tr::add "en_US" "tui::menu::main.option.nvidia-smi" "Open Nvidia Monitor"
 tr::add "en_US" "tui::menu::main.option.nvidia-smi.tip" "Press CTRL+C to return"
 tr::add "en_US" "tui::menu::main.drivernotinstalled" "Could not detect the NVIDIA driver on the system.\n\nInstall the driver and restart the system so that the driver is loaded before accessing the post-installation options."
 
+tr::add "de_DE" "tui::menu::main.nav.start" "[TUI] Hauptmenü wird geöffnet..."
+tr::add "de_DE" "tui.menu.main.title" "DEBIAN NVIDIA INSTALLER"
+tr::add "de_DE" "tui.menu.main.subtitle" "Wählen Sie eine Option:"
+tr::add "de_DE" "tui.menu.main.option.installdrivers" "Treiber installieren"
+tr::add "de_DE" "tui.menu.main.option.uninstalldrivers" "Treiber deinstallieren"
+tr::add "de_DE" "tui.menu.main.option.posinstall" "Nachinstallationsoptionen"
+tr::add "de_DE" "tui::menu::main.option.app_gpu_management" "App-GPU-Einstellungen"
+tr::add "de_DE" "tui::menu::main.option.nvidia-smi" "Nvidia-Monitor öffnen"
+tr::add "de_DE" "tui::menu::main.option.nvidia-smi.tip" "Drücken Sie STRG+C zum Zurückkehren"
+tr::add "de_DE" "tui::menu::main.drivernotinstalled" "Der NVIDIA-Treiber konnte nicht im System erkannt werden.\n\nInstallieren Sie den Treiber und starten Sie das System neu, damit der Treiber geladen wird, bevor Sie auf die Nachinstallationsoptionen zugreifen."
+
 tui::menu::posinstall() {
     local option_labels=()
     local option_actions=()
@@ -209,6 +220,22 @@ tr::add "en_US" "tui::menu::posinstall.option.cuda.error" "Could not determine t
 tr::add "en_US" "tui::menu::posinstall.option.cuda.install" "Install CUDA Toolkit"
 tr::add "en_US" "tui::menu::posinstall.option.cuda.uninstall" "Uninstall CUDA Toolkit"
 
+tr::add "de_DE" "tui::menu::posinstall.nav.start" "[TUI] Nachinstallationsmenü wird geöffnet..."
+tr::add "de_DE" "tui::menu::posinstall.title" "NACHINSTALLATIONSOPTIONEN"
+tr::add "de_DE" "tui::menu::posinstall.subtitle" "Wählen Sie eine Option:"
+tr::add "de_DE" "tui::menu::posinstall.power_service.status" "Status der NVIDIA-Zusatzstromdienste: %1"
+tr::add "de_DE" "tui::menu::posinstall.option.enable_power_service" "NVIDIA-Stromdienste aktivieren"
+tr::add "de_DE" "tui::menu::posinstall.option.disable_power_service" "NVIDIA-Stromdienste deaktivieren"
+tr::add "de_DE" "tui::menu::posinstall.pvma.status" "Option NVreg_PreserveVideoMemoryAllocations=%1"
+tr::add "de_DE" "tui::menu::posinstall.option.enable_pvma" "NVreg_PreserveVideoMemoryAllocations aktivieren"
+tr::add "de_DE" "tui::menu::posinstall.option.disable_pvma" "NVreg_PreserveVideoMemoryAllocations deaktivieren"
+tr::add "de_DE" "tui::menu::posinstall.s0ixpm.status" "Option NVreg_EnableS0ixPowerManagement=%1"
+tr::add "de_DE" "tui::menu::posinstall.option.enable_s0ixpm" "NVreg_EnableS0ixPowerManagement aktivieren"
+tr::add "de_DE" "tui::menu::posinstall.option.disable_s0ixpm" "NVreg_EnableS0ixPowerManagement deaktivieren"
+tr::add "de_DE" "tui::menu::posinstall.option.cuda.error" "Das Repository für die Installation des CUDA Toolkit konnte nicht ermittelt werden. Installieren Sie die Treiber mit diesem Skript neu und versuchen Sie es erneut."
+tr::add "de_DE" "tui::menu::posinstall.option.cuda.install" "CUDA Toolkit installieren"
+tr::add "de_DE" "tui::menu::posinstall.option.cuda.uninstall" "CUDA Toolkit deinstallieren"
+
 tui::menu::flavors() {
     log::info "$(tr::t "tui::menu::flavors.nav.start")"
 
@@ -270,6 +297,18 @@ tr::add "en_US" "tui::menu::flavors.option.cuda.stable.proprietary" "v%1 Proprie
 tr::add "en_US" "tui::menu::flavors.option.cuda.stable.opensource" "v%1 Open Source [Cuda Repo]"
 tr::add "en_US" "tui::menu::flavors.option.cuda.latest.proprietary" "v%1 Proprietary (unstable) [Cuda Repo]"
 tr::add "en_US" "tui::menu::flavors.option.cuda.latest.opensource" "v%1 Open Source (unstable) [Cuda Repo]"
+
+tr::add "de_DE" "tui::menu::flavors.nav.start" "[TUI] Nvidia-Treiberauswahlmenü wird geöffnet..."
+tr::add "de_DE" "tui::menu::flavors.title" "TREIBERTYP AUSWÄHLEN"
+tr::add "de_DE" "tui::menu::flavors.prompt" \
+    "Proprietär → geschlossener Kernel + geschlossene Bibliotheken.\nStabil und kompatibel, empfohlen für GTX 10xx oder älter.\n\nOpen Source → offener Kernel + geschlossene Bibliotheken.\nBessere Linux-Integration, empfohlen für GTX 16xx, RTX 20xx oder neuer.\n\nWeitere Details: https://github.com/NVIDIA/open-gpu-kernel-modules"
+tr::add "de_DE" "tui::menu::flavors.option.debian.proprietary.535" "v535 Proprietär [Debian Repo]"
+tr::add "de_DE" "tui::menu::flavors.option.debian.proprietary.550" "v550 Proprietär [Debian Repo]"
+tr::add "de_DE" "tui::menu::flavors.option.debian.opensource.550" "v550 Open Source [Debian Repo]"
+tr::add "de_DE" "tui::menu::flavors.option.cuda.stable.proprietary" "v%1 Proprietär [Cuda Repo]"
+tr::add "de_DE" "tui::menu::flavors.option.cuda.stable.opensource" "v%1 Open Source [Cuda Repo]"
+tr::add "de_DE" "tui::menu::flavors.option.cuda.latest.proprietary" "v%1 Proprietär (instabil) [Cuda Repo]"
+tr::add "de_DE" "tui::menu::flavors.option.cuda.latest.opensource" "v%1 Open Source (instabil) [Cuda Repo]"
 
 tui::menu::app_gpu_management() {
     log::info "$(tr::t "tui::menu::app_gpu_management.nav.start")"
@@ -341,3 +380,8 @@ tr::add "en_US" "tui::menu::app_gpu_management.nav.start" "[TUI] Opening the App
 tr::add "en_US" "tui::menu::app_gpu_management.tui.title" "App GPU Preference"
 tr::add "en_US" "tui::menu::app_gpu_management.tui.prompt" "Select an application to set which GPU to use:\n\n• [x] Dedicated GPU\n• [ ] Integrated GPU"
 tr::add "en_US" "tui::menu::app_gpu_management.tui.option.restore" "Revert changes"
+
+tr::add "de_DE" "tui::menu::app_gpu_management.nav.start" "[TUI] App-GPU-Einstellungsmenü wird geöffnet..."
+tr::add "de_DE" "tui::menu::app_gpu_management.tui.title" "App-GPU-Einstellungen"
+tr::add "de_DE" "tui::menu::app_gpu_management.tui.prompt" "Wählen Sie eine Anwendung aus, um festzulegen, welche GPU verwendet werden soll:\n\n• [x] Dedizierte GPU\n• [ ] Integrierte GPU"
+tr::add "de_DE" "tui::menu::app_gpu_management.tui.option.restore" "Änderungen rückgängig machen"

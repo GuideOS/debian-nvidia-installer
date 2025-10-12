@@ -90,3 +90,8 @@ tui::msgbox::dangerous_action() {
 tr::add "pt_BR" "tui::msgbox::dangerous_action" "Proceda com cautela e certifique-se de compreender totalmente as consequências desta ação antes de continuar."
 
 tr::add "en_US" "tui::msgbox::dangerous_action" "Proceed with caution and ensure you fully understand the consequences of this action before continuing."
+
+tr::add "de_DE" "tui::msgbox::optimus_incompatible" \
+    "Dieses System verfügt über ein Nvidia Optimus-Setup, das mit den verfügbaren Treibern aus dem %1-Repository nicht kompatibel ist.\n\nInstallieren Sie stattdessen die proprietären Treiber aus dem Debian-Repository."
+
+tr::add "de_DE" "tui::msgbox::dangerous_action" "Gehen Sie vorsichtig vor und stellen Sie sicher, dass Sie die Konsequenzen dieser Aktion vollständig verstehen, bevor Sie fortfahren."
