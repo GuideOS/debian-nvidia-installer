@@ -1,3 +1,16 @@
+debian-nvidia-installer (0.13.1) unstable; urgency=medium
+
+  * Added complete German translation support for TUI
+  * Extended translation system to support de_DE locale
+  * Added German translations for all menu components
+  * Added German translations for help messages and system notifications
+  * Added German translations for post-installation options
+  * Added German translations for CUDA toolkit management
+  * Added German translations for GPU power management features
+  * Improved language detection for German system locales
+
+ -- Actionschnitzel <actionschnitzel@guideos.de>  Sat, 12 Oct 2025 15:30:00 +0200
+
 debian-nvidia-installer (0.13.0) unstable; urgency=medium
 
   * Initial release.

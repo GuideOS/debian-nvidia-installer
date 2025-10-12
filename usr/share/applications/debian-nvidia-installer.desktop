@@ -13,4 +13,4 @@ Exec=pkexec /usr/bin/debian-nvidia-installer
 Icon=debian-nvidia-installer
 Terminal=true
 Type=Application
-Categories=Utility;
+Categories=GuideOS;
