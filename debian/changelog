@@ -1,3 +1,24 @@
+debian-nvidia-installer (0.14.1) unstable; urgency=medium
+
+  * Fixed dynamic Debian version detection for CUDA repository URLs
+  * Updated CUDA driver versions (latest: 590, stable: 580)
+  * Improved version detection to support Debian 12 and Debian 13
+
+ -- Actionschnitzel <actionschnitzel@guideos.de>  Tue, 10 Dec 2025 12:00:00 +0100
+
+debian-nvidia-installer (0.14.0) unstable; urgency=medium
+
+  * Merged upstream changes from devleonardoamaral/debian-nvidia-installer
+  * Added support for deb822 sources format (for newer Debian/Ubuntu versions)
+  * Added GitHub issue templates (bug reports, documentation, enhancements, questions)
+  * Removed forced distro check in requirements
+  * Refactored main script with better documentation and structure
+  * Improved code organization with documented functions and variables
+  * Preserved German translation support in refactored codebase
+  * Removed .github/FUNDING.yml
+
+ -- Actionschnitzel <actionschnitzel@guideos.de>  Sun, 08 Dec 2025 12:00:00 +0100
+
 debian-nvidia-installer (0.13.1) unstable; urgency=medium
 
   * Added complete German translation support for TUI

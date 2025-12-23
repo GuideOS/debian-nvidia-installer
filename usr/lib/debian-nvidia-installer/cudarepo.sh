@@ -19,8 +19,8 @@
 # along with debian-nvidia-installer. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 declare -Ag CUDA_DRIVER_VERSIONS=(
-    ["latest"]="580"
-    ["stable"]="575"
+    ["latest"]="590"
+#    ["stable"]="580"
 )
 
 cudarepo::install_driver() {
@@ -89,10 +89,22 @@ tr::add "en_US" "cudarepo::install_driver.invalid_flavor" "An unexpected error o
 
 cudarepo::install_cuda_repository() {
     local temp_download_file="/tmp/cudakeyring.deb"
+    local debian_version
     trap 'rm -f "$temp_download_file"' RETURN
 
+    # Detecta a versão do Debian
+    if [[ -f /etc/os-release ]]; then
+        # shellcheck disable=SC1091
+        source /etc/os-release
+        debian_version="${VERSION_ID%%.*}"  # Extrai apenas o número principal (12, 13, etc.)
+    else
+        log::critical "$(tr::t "cudarepo::install_cuda_repository.version_detection_failure")"
+        log::input _ "$(tr::t "default.script.pause")"
+        return 1
+    fi
+
     # Faz o download instalador do repositório CUDA
-    log::capture_cmd wget -O "$temp_download_file" https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb
+    log::capture_cmd wget -O "$temp_download_file" "https://developer.download.nvidia.com/compute/cuda/repos/debian${debian_version}/x86_64/cuda-keyring_1.1-1_all.deb"
     if [[ "$?" -ne 0 ]]; then
         log::critical "$(tr::t "cudarepo::install_cuda_repository.download_failure")"
         log::input _ "$(tr::t "default.script.pause")"
@@ -114,9 +126,14 @@ cudarepo::install_cuda_repository() {
     fi
 }
 
+tr::add "pt_BR" "cudarepo::install_cuda_repository.version_detection_failure" "Falha ao detectar a versão do Debian. Operação abortada."
 tr::add "pt_BR" "cudarepo::install_cuda_repository.download_failure" "Falha no download do pacote de instalação do repositório CUDA. Operação abortada."
 
+tr::add "en_US" "cudarepo::install_cuda_repository.version_detection_failure" "Failed to detect Debian version. Operation aborted."
 tr::add "en_US" "cudarepo::install_cuda_repository.download_failure" "Failed to download the CUDA repository installation package. Operation aborted."
+
+tr::add "de_DE" "cudarepo::install_cuda_repository.version_detection_failure" "Fehler beim Erkennen der Debian-Version. Vorgang abgebrochen."
+tr::add "de_DE" "cudarepo::install_cuda_repository.download_failure" "Fehler beim Herunterladen des CUDA-Repository-Installationspakets. Vorgang abgebrochen."
 
 cudarepo::uninstall_cuda_repository() {
     # Uninstalls the installation package from the CUDA repository
