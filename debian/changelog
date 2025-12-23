@@ -1,4 +1,4 @@
-debian-nvidia-installer (0.14.1) unstable; urgency=medium
+debian-nvidia-installer (0.14.2) unstable; urgency=medium
 
   * Fixed dynamic Debian version detection for CUDA repository URLs
   * Updated CUDA driver versions (latest: 590, stable: 580)
