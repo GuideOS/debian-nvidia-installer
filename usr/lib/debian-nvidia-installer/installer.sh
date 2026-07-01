@@ -42,7 +42,8 @@ installer::install_debian_proprietary535() {
     local status
     ( # Subshell para isolar a variável DEBIAN_FRONTEND
         export DEBIAN_FRONTEND=noninteractive
-        packages::install "nvidia-tesla-535-kernel-dkms" "nvidia-tesla-535-driver" "firmware-misc-nonfree"
+        packages::install "nvidia-tesla-535-kernel-dkms" "nvidia-tesla-535-driver" "nvidia-settings-tesla-535" "firmware-misc-nonfree"
+        packages::install "nvidia-settings"
     )
     status=$?
 
@@ -72,6 +73,7 @@ installer::install_debian_proprietary550() {
     ( # Subshell para isolar a variável DEBIAN_FRONTEND
         export DEBIAN_FRONTEND=noninteractive
         packages::install "nvidia-kernel-dkms" "nvidia-driver" "firmware-misc-nonfree"
+        packages::install "nvidia-settings"
     )
     status=$?
 
@@ -112,6 +114,7 @@ installer::install_debian_opensource550() {
     ( # Subshell para isolar a variável DEBIAN_FRONTEND
         export DEBIAN_FRONTEND=noninteractive
         packages::install "nvidia-open-kernel-dkms" "nvidia-driver" "firmware-misc-nonfree"
+        packages::install "nvidia-settings"
     )
     status=$?
 
@@ -370,7 +373,15 @@ installer::install_nvidia() {
 
     log::info "$(tr::t "installer::install_nvidia.success")"
     tui::msgbox::custom "" "$(tr::t "installer::install_nvidia.success")"
-    tui::msgbox::need_restart # Exibe aviso que é necessário reiniciar
+    #tui::msgbox::need_restart # Exibe aviso que é necessário reiniciar
+
+# NEU: Abfrage für sofortigen Neustart im Skript-Stil
+    if tui::yesno::default "Systemneustart" "Die Installation ist abgeschlossen. Möchten Sie das System jetzt neu starten?"; then
+        log::info "Benutzer hat Neustart zugestimmt. Starte neu..."
+        reboot
+    else
+        log::info "Benutzer hat Neustart abgelehnt."
+    fi
 
     script::exit
 }
@@ -458,19 +469,45 @@ installer::uninstall_nvidia() {
         log::error "$(tr::t "installer::uninstall_nvidia.update_grub.failed")"
     fi
 
-    # Collect all installed NVIDIA-related packages
-    # Excludes firmware packages and the debian-nvidia-installer script itself
-    local pkgs=()
+    # -------------------------------------------------------------------------
+    # NEU: Erkennung und automatisierter Aufruf der nvidiarun
+    # -------------------------------------------------------------------------
+    local run_script="/usr/lib/debian-nvidia-installer/nvidiarun" # <-- HIER DEN ECHTEN PFAD EINTRAGEN
+    local run_file_found=false
 
-    # Base exclude list
+    # Prüfen, ob im Verzeichnis eine nvidia*.run Datei existiert
+    if compgen -G "/usr/local/bin/Nvidia/NVIDIA*.run" >/dev/null; then
+        run_file_found=true
+    fi
+
+    # Nur ausführen, wenn die .run-Datei UND das Skript existieren
+    if [ "$run_file_found" = true ] && [ -f "$run_script" ]; then
+        log::info "NVIDIA .run-Treiberdatei in /usr/local/bin/Nvidia/ gefunden."
+        log::info "Starte vollständige Deinstallation via nvidiarun..."
+
+        if bash "$run_script" --silent-uninstall; then
+            log::info "Deinstallation über nvidiarun erfolgreich beendet."
+        else
+            log::error "Fehler bei der Ausführung von nvidiarun."
+        fi
+
+    elif command -v nvidia-uninstall >/dev/null 2>&1; then
+        # Fallback: Falls das Skript fehlt, aber der Uninstaller im System ist
+        log::info "NVIDIA-Uninstaller im System gefunden. Starte Standard-Deinstallation..."
+        nvidia-uninstall --silent
+    else
+        log::info "Keine NVIDIA .run-Installation erkannt. Fahre mit Paketprüfung fort."
+    fi
+    # -------------------------------------------------------------------------
+
+    # Collect all installed NVIDIA-related packages (für den Fall, dass noch APT Reste da sind)
+    local pkgs=()
     exclude="debian-nvidia-installer"
 
-    # If XFCE is installed, also exclude libxnvctrl0 (all architectures)
     if packages::is_installed xfce4-sensors-plugin; then
         exclude="$exclude|libxnvctrl0(:.*)?"
     fi
 
-    # Build pkgs array
     mapfile -t pkgs < <(
         dpkg -l | awk -v ex="$exclude" '($2 ~ /nvidia/ || $2 ~ /^libxnv/ || $2 ~ /^cuda-drivers$/ || $2 ~ /cuda-toolkit/) && $2 !~ "^("ex")$" {print $2}'
     )
@@ -515,7 +552,15 @@ installer::uninstall_nvidia() {
     # Final success message and restart prompt
     log::info "$(tr::t "installer::uninstall_nvidia.success")"
     tui::msgbox::warn "$(tr::t "installer::uninstall_nvidia.success")"
-    tui::msgbox::need_restart
+    #tui::msgbox::need_restart
+
+# NEU: Abfrage für sofortigen Neustart im Skript-Stil
+    if tui::yesno::default "Systemneustart" "Die Deinstallation ist abgeschlossen. Möchten Sie das System jetzt neu starten?"; then
+        log::info "Benutzer hat Neustart zugestimmt. Starte neu..."
+        reboot
+    else
+        log::info "Benutzer hat Neustart abgelehnt."
+    fi
 
     # Exit script safely
     script::exit

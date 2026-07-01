@@ -19,8 +19,9 @@
 # along with debian-nvidia-installer. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 declare -Ag CUDA_DRIVER_VERSIONS=(
-    ["latest"]="590"
-#    ["stable"]="580"
+    ["latest"]="610"
+    ["stable"]="595"
+    ["legacy"]="580"
 )
 
 cudarepo::install_driver() {

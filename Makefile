@@ -26,6 +26,7 @@ install:
 	
 	# Install library files
 	install -m 644 usr/lib/debian-nvidia-installer/*.sh $(DESTDIR)$(PREFIX)/lib/debian-nvidia-installer/
+	install -m 755 usr/lib/debian-nvidia-installer/nvidiarun $(DESTDIR)$(PREFIX)/lib/debian-nvidia-installer/
 	install -m 644 usr/lib/debian-nvidia-installer/translate/*.sh $(DESTDIR)$(PREFIX)/lib/debian-nvidia-installer/translate/
 	install -m 644 usr/lib/debian-nvidia-installer/tui/*.sh $(DESTDIR)$(PREFIX)/lib/debian-nvidia-installer/tui/
 	
