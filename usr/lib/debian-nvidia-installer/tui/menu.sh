@@ -57,7 +57,7 @@ tui::menu::main() {
 }
 
 tr::add "pt_BR" "tui::menu::main.nav.start" "[TUI] Abrindo o menu Principal..."
-tr::add "pt_BR" "tui.menu.main.title" "DEBIAN NVIDIA INSTALLER"
+tr::add "pt_BR" "tui.menu.main.title" "GuideOS NVIDIA INSTALLER"
 tr::add "pt_BR" "tui.menu.main.subtitle" "Selecione uma opção:"
 tr::add "pt_BR" "tui.menu.main.option.installdrivers" "Instalar Drivers"
 tr::add "pt_BR" "tui.menu.main.option.uninstalldrivers" "Desinstalar Drivers"
@@ -68,7 +68,7 @@ tr::add "pt_BR" "tui::menu::main.option.nvidia-smi.tip" "Pressione CTRL+C para v
 tr::add "pt_BR" "tui::menu::main.drivernotinstalled" "Não foi possível detectar o driver da NVIDIA no sistema.\n\nInstale o driver e reinicie o sistema para que o driver seja carregado antes de acessar as opções pós-instalação."
 
 tr::add "en_US" "tui::menu::main.nav.start" "[TUI] Opening the Main menu..."
-tr::add "en_US" "tui.menu.main.title" "DEBIAN NVIDIA INSTALLER"
+tr::add "en_US" "tui.menu.main.title" "GuideOS NVIDIA INSTALLER"
 tr::add "en_US" "tui.menu.main.subtitle" "Select an option:"
 tr::add "en_US" "tui.menu.main.option.installdrivers" "Install Drivers"
 tr::add "en_US" "tui.menu.main.option.uninstalldrivers" "Uninstall Drivers"
@@ -79,7 +79,7 @@ tr::add "en_US" "tui::menu::main.option.nvidia-smi.tip" "Press CTRL+C to return"
 tr::add "en_US" "tui::menu::main.drivernotinstalled" "Could not detect the NVIDIA driver on the system.\n\nInstall the driver and restart the system so that the driver is loaded before accessing the post-installation options."
 
 tr::add "de_DE" "tui::menu::main.nav.start" "[TUI] Hauptmenü wird geöffnet..."
-tr::add "de_DE" "tui.menu.main.title" "DEBIAN NVIDIA INSTALLER"
+tr::add "de_DE" "tui.menu.main.title" "GuideOS NVIDIA INSTALLER"
 tr::add "de_DE" "tui.menu.main.subtitle" "Wählen Sie eine Option:"
 tr::add "de_DE" "tui.menu.main.option.installdrivers" "Treiber installieren"
 tr::add "de_DE" "tui.menu.main.option.uninstalldrivers" "Treiber deinstallieren"
