@@ -1,3 +1,8 @@
+debian-nvidia-installer (0.14.4) unstable; urgency=medium
+  * cudarepo::setup_early_kms
+
+ -- Nightworker <nightworker@guideos.de>  Fri, 21 Aug 2026 16:00:00 +0200
+
 debian-nvidia-installer (0.14.3) unstable; urgency=medium
   * Updated CUDA driver versions (latest: 610, stable: 595)
   * Added Nvidia.run for older graphics cards
